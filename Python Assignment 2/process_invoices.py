@@ -9,18 +9,16 @@ def read_docx(file_path):
     return text
 
 def process_invoices():
-    # Define your directories
+    # My directories
     invoices_directory = r'C:\Python Programs\Python Assignment 2\Invoices'
     output_directory = r'C:\Python Programs\Python Assignment 2\Output'
 
-    # If the output directory doesn't exist, create it
+    # For Creating New Directory - create it
     if not os.path.exists(output_directory):
         os.makedirs(output_directory)
 
-    # Define the data structure to hold invoice data
     invoice_data = []
 
-    # Iterate over all files in the invoices directory
     for filename in os.listdir(invoices_directory):
         if filename.endswith('.docx') and not filename.startswith('~$'):
             # Open the .docx file
