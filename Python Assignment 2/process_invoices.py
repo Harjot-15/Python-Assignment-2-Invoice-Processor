@@ -30,9 +30,10 @@ def process_invoices():
             product_section = re.search(r'PRODUCTS(.*?)(SUBTOTAL:)', contents, re.DOTALL).group(1)
             product_lines = re.findall(r'\b\w+\s*\w*:\d+', product_section)
             total_products = sum([int(re.search(r'\d+', line).group()) for line in product_lines])
-            subtotal = float(re.search(r'SUBTOTAL:\s*(\d+\.\d+)', contents).group(1))
-            tax = float(re.search(r'TAX:\s*(\d+\.\d+)', contents).group(1))
-            total = float(re.search(r'TOTAL:\s*(\d+\.\d+)', contents).group(1))
+            money_values = re.findall(r'(\d+\.\d+)', contents)
+            subtotal = float(money_values[0])
+            tax = float(money_values[1])
+            total = float(money_values[2])
 
             # Append the extracted data to the invoice data list
             invoice_data.append([invoice_id, total_products, subtotal, tax, total])
